@@ -29,3 +29,93 @@ INSERT INTO `dungeon` VALUES ('32683', '33381', '4', 'Mainland of Aden', '32682'
 INSERT INTO `dungeon` VALUES ('32682', '33387', '4', 'Mainland of Aden', '32683', '33381', '4', 'Mainland of Aden', '0');
 INSERT INTO `dungeon` VALUES ('32910', '32569', '300', 'Aden Castle', '34096', '33197', '4', 'Mainland of Aden', '6');
 INSERT INTO `dungeon` VALUES ('34096', '33197', '4', 'Mainland of Aden', '32910', '32569', '300', 'Aden Castle', '6');
+
+-- put all aden houses up for auction
+DELETE FROM board_auction WHERE house_area = 'Aden';
+
+INSERT INTO board_auction (house_id, house_name, house_area, deadline, price, location, old_owner, old_owner_id, bidder, bidder_id)
+SELECT house_id, house_name, house_area, '2009-01-24 00:00:00', 100000, 'Aden', '', 0, '', 0
+FROM house 
+WHERE location = 'Aden';
+
+-- add missing aden housekeepers
+UPDATE `house` SET keeper_id = '50596' WHERE house_id = '458753';
+UPDATE `house` SET keeper_id = '50567' WHERE house_id = '458754';
+UPDATE `house` SET keeper_id = '50607' WHERE house_id = '458755';
+UPDATE `house` SET keeper_id = '50581' WHERE house_id = '458756';
+UPDATE `house` SET keeper_id = '50585' WHERE house_id = '458757';
+-- 5
+UPDATE `house` SET keeper_id = '50553' WHERE house_id = '458758';
+UPDATE `house` SET keeper_id = '50594' WHERE house_id = '458759';
+UPDATE `house` SET keeper_id = '50561' WHERE house_id = '458760';
+UPDATE `house` SET keeper_id = '50575' WHERE house_id = '458761';
+UPDATE `house` SET keeper_id = '50554' WHERE house_id = '458762';
+-- 10
+UPDATE `house` SET keeper_id = '50588' WHERE house_id = '458763';
+UPDATE `house` SET keeper_id = '50560' WHERE house_id = '458764';
+UPDATE `house` SET keeper_id = '50572' WHERE house_id = '458765';
+UPDATE `house` SET keeper_id = '50551' WHERE house_id = '458766';
+UPDATE `house` SET keeper_id = '50547' WHERE house_id = '458767';
+-- 15
+UPDATE `house` SET keeper_id = '50568' WHERE house_id = '458768';
+UPDATE `house` SET keeper_id = '50590' WHERE house_id = '458769';
+UPDATE `house` SET keeper_id = '50570' WHERE house_id = '458770';
+UPDATE `house` SET keeper_id = '50595' WHERE house_id = '458771';
+UPDATE `house` SET keeper_id = '50593' WHERE house_id = '458772';
+-- 20
+UPDATE `house` SET keeper_id = '50587' WHERE house_id = '458773';
+UPDATE `house` SET keeper_id = '50571' WHERE house_id = '458774';
+UPDATE `house` SET keeper_id = '50564' WHERE house_id = '458775';
+UPDATE `house` SET keeper_id = '50611' WHERE house_id = '458776';
+UPDATE `house` SET keeper_id = '50600' WHERE house_id = '458777';
+-- 25
+UPDATE `house` SET keeper_id = '50603' WHERE house_id = '458778';
+UPDATE `house` SET keeper_id = '50558' WHERE house_id = '458779';
+UPDATE `house` SET keeper_id = '50599' WHERE house_id = '458780';
+UPDATE `house` SET keeper_id = '50556' WHERE house_id = '458781';
+UPDATE `house` SET keeper_id = '50546' WHERE house_id = '458782';
+-- 30
+UPDATE `house` SET keeper_id = '50584' WHERE house_id = '458783';
+UPDATE `house` SET keeper_id = '50582' WHERE house_id = '458784';
+UPDATE `house` SET keeper_id = '50589' WHERE house_id = '458785';
+UPDATE `house` SET keeper_id = '50605' WHERE house_id = '458786';
+UPDATE `house` SET keeper_id = '50557' WHERE house_id = '458787';
+-- 35
+UPDATE `house` SET keeper_id = '50583' WHERE house_id = '458788';
+UPDATE `house` SET keeper_id = '50580' WHERE house_id = '458789';
+UPDATE `house` SET keeper_id = '50591' WHERE house_id = '458790';
+UPDATE `house` SET keeper_id = '50569' WHERE house_id = '458791';
+UPDATE `house` SET keeper_id = '50548' WHERE house_id = '458792';
+-- 40
+UPDATE `house` SET keeper_id = '50578' WHERE house_id = '458793';
+UPDATE `house` SET keeper_id = '50562' WHERE house_id = '458794';
+UPDATE `house` SET keeper_id = '50577' WHERE house_id = '458795';
+UPDATE `house` SET keeper_id = '50573' WHERE house_id = '458796';
+UPDATE `house` SET keeper_id = '50612' WHERE house_id = '458797';
+-- 45
+UPDATE `house` SET keeper_id = '50598' WHERE house_id = '458798';
+UPDATE `house` SET keeper_id = '50565' WHERE house_id = '458799';
+UPDATE `house` SET keeper_id = '50602' WHERE house_id = '458800';
+UPDATE `house` SET keeper_id = '50597' WHERE house_id = '458801';
+UPDATE `house` SET keeper_id = '50574' WHERE house_id = '458802';
+-- 50
+UPDATE `house` SET keeper_id = '50566' WHERE house_id = '458803';
+UPDATE `house` SET keeper_id = '50610' WHERE house_id = '458804';
+UPDATE `house` SET keeper_id = '50549' WHERE house_id = '458805';
+UPDATE `house` SET keeper_id = '50579' WHERE house_id = '458806';
+UPDATE `house` SET keeper_id = '50576' WHERE house_id = '458807';
+-- 55
+UPDATE `house` SET keeper_id = '50609' WHERE house_id = '458808';
+UPDATE `house` SET keeper_id = '50559' WHERE house_id = '458809';
+UPDATE `house` SET keeper_id = '50592' WHERE house_id = '458810';
+UPDATE `house` SET keeper_id = '50604' WHERE house_id = '458811';
+UPDATE `house` SET keeper_id = '50555' WHERE house_id = '458812';
+-- 60
+UPDATE `house` SET keeper_id = '50606' WHERE house_id = '458813';
+UPDATE `house` SET keeper_id = '50586' WHERE house_id = '458814';
+UPDATE `house` SET keeper_id = '50601' WHERE house_id = '458815';
+UPDATE `house` SET keeper_id = '50550' WHERE house_id = '458816';
+UPDATE `house` SET keeper_id = '50563' WHERE house_id = '458817';
+-- 65
+UPDATE `house` SET keeper_id = '50552' WHERE house_id = '458818';
+UPDATE `house` SET keeper_id = '50613' WHERE house_id = '458819';
