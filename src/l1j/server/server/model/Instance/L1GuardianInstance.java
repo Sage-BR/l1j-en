@@ -22,8 +22,6 @@ import static l1j.server.server.model.skill.L1SkillId.FOG_OF_SLEEPING;
 
 import java.util.ArrayList;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ThreadLocalRandom;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,9 +39,12 @@ import l1j.server.server.serverpackets.S_ChangeHeading;
 import l1j.server.server.serverpackets.S_DoActionGFX;
 import l1j.server.server.serverpackets.S_NPCTalkReturn;
 import l1j.server.server.serverpackets.S_NpcChatPacket;
-import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.templates.L1Npc;
 import l1j.server.server.utils.CalcExp;
+import l1j.server.server.model.Instance.behavior.ElvenForestGuardianBehavior;
+import l1j.server.server.model.Instance.behavior.EntBehavior;
+import l1j.server.server.model.Instance.behavior.PanBehavior;
+import l1j.server.server.model.Instance.behavior.ArachneBehavior;
 
 public class L1GuardianInstance extends L1NpcInstance {
 	/**
@@ -57,11 +58,13 @@ public class L1GuardianInstance extends L1NpcInstance {
 
 	private ScheduledFuture<?> _monitorFuture;
 
-	/**
+    private ElvenForestGuardianBehavior _elvenGuardianBehavior;
+    /**
 	 * @param template
 	 */
 	public L1GuardianInstance(L1Npc template) {
 		super(template);
+        _elvenGuardianBehavior = ElvenForestGuardianBehaviorFactory.create(template.get_npcId());
 	}
 
 	@Override
@@ -110,55 +113,21 @@ public class L1GuardianInstance extends L1NpcInstance {
 
 	@Override
 	public void onAction(L1PcInstance player) {
-		if (player.getType() == 2 && player.getCurrentWeapon() == 0 && player.isElf()) {
-			L1Attack attack = new L1Attack(player, this);
+        if (getCurrentHp() <= 0 || isDead()) return;
 
-			if (attack.calcHit()) {
-				if (getNpcTemplate().get_npcId() == 70848) {
-					int chance = ThreadLocalRandom.current().nextInt(100) + 1;
-					if (chance <= 10) {
-						player.getInventory().storeItem(40506, 1);
-						player.sendPackets(new S_ServerMessage(143, "$755", "$794"));
-					} else if (chance <= 60 && chance > 10) {
-						player.getInventory().storeItem(40507, 1);
-						player.sendPackets(new S_ServerMessage(143, "$755", "$763"));
-					} else if (chance <= 70 && chance > 60) {
-						player.getInventory().storeItem(40505, 1);
-						player.sendPackets(new S_ServerMessage(143, "$755", "$770"));
-					}
-				}
-				if (getNpcTemplate().get_npcId() == 70850) {
-					int chance = ThreadLocalRandom.current().nextInt(100) + 1;
-					if (chance <= 30) {
-						player.getInventory().storeItem(40519, 5);
-						player.sendPackets(new S_ServerMessage(143, "$753", "$760" + " (" + 5 + ")"));
-					}
-				}
-				if (getNpcTemplate().get_npcId() == 70846) {
-					int chance = ThreadLocalRandom.current().nextInt(100) + 1;
-					if (chance <= 30) {
-						player.getInventory().storeItem(40503, 1);
-						player.sendPackets(new S_ServerMessage(143, "$752", "$769"));
-					}
-				}
-				attack.calcDamage();
-				attack.calcStaffOfMana();
-				attack.addPcPoisonAttack(player, this);
-				attack.addChaserAttack();
-			}
-			attack.action();
-			attack.commit();
-		} else if (getCurrentHp() > 0 && !isDead()) {
-			L1Attack attack = new L1Attack(player, this);
-			if (attack.calcHit()) {
-				attack.calcDamage();
-				attack.calcStaffOfMana();
-				attack.addPcPoisonAttack(player, this);
-				attack.addChaserAttack();
-			}
-			attack.action();
-			attack.commit();
-		}
+        L1Attack attack = new L1Attack(player, this);
+        if (attack.calcHit()) {
+            if (canTriggerElvenGuardianBehavior(player)) {
+                _elvenGuardianBehavior.onHit(this, player);
+            }
+
+            attack.calcDamage();
+            attack.calcStaffOfMana();
+            attack.addPcPoisonAttack(player, this);
+            attack.addChaserAttack();
+        }
+        attack.action();
+        attack.commit();
 	}
 
 	@Override
@@ -239,7 +208,7 @@ public class L1GuardianInstance extends L1NpcInstance {
 	public void receiveDamage(L1Character attacker, int damage) {
 		if (attacker instanceof L1PcInstance && damage > 0) {
 			L1PcInstance pc = (L1PcInstance) attacker;
-			if (pc.getType() == 2 && pc.getCurrentWeapon() == 0) {
+			if (pc.isElf() && pc.getCurrentWeapon() == 0) {
 			} else {
 				if (getCurrentHp() > 0 && !isDead()) {
 					if (damage >= 0) {
@@ -377,4 +346,30 @@ public class L1GuardianInstance extends L1NpcInstance {
 			}
 		}
 	}
+
+    private boolean canTriggerElvenGuardianBehavior(L1PcInstance player) {
+        return player.isElf()
+                && player.getCurrentWeapon() == 0
+                && _elvenGuardianBehavior != null;
+    }
+
+    /**
+     * Private static factory for guardian behaviors.
+     * Nested here because it's only used by L1GuardianInstance.
+     */
+    private static final class ElvenForestGuardianBehaviorFactory {
+
+        private ElvenForestGuardianBehaviorFactory() {
+            // prevent instantiation
+        }
+
+        public static ElvenForestGuardianBehavior create(int npcId) {
+            switch (npcId) {
+                case 70848: return new EntBehavior();
+                case 70850: return new PanBehavior();
+                case 70846: return new ArachneBehavior();
+                default: return null;
+            }
+        }
+    }
 }
