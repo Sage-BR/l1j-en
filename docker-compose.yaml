@@ -1,6 +1,6 @@
 services:
   l1jdb:
-    image: mariadb:latest
+    image: mariadb:12.0.2
     container_name: l1j-db
     restart: always
     env_file:
