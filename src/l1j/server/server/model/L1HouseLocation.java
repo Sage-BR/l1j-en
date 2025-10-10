@@ -3,11 +3,11 @@
  */
 package l1j.server.server.model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import l1j.server.server.datatables.HouseTable;
+import l1j.server.server.datatables.NpcSpawnTable;
+import l1j.server.server.templates.L1House;
 import l1j.server.server.types.Point;
 
 public class L1HouseLocation {
@@ -46,73 +46,6 @@ public class L1HouseLocation {
 	private static final List<Integer> _houseIds = HouseTable.getHouseIdList();
 
 	private static final int ADEN = 4;
-
-	private static final Map<Integer, int[]> houseLocations = new HashMap<Integer, int[]>();
-
-	static {
-		houseLocations.put(262145, new int[] { 33374, 32657 });
-		houseLocations.put(262146, new int[] { 33384, 32655 });
-		houseLocations.put(262147, new int[] { 33395, 32656 });
-		houseLocations.put(262148, new int[] { 33428, 32659 });
-		houseLocations.put(262149, new int[] { 33439, 32666 });
-		houseLocations.put(262150, new int[] { 33457, 32654 });
-		houseLocations.put(262151, new int[] { 33477, 32668 });
-		houseLocations.put(262152, new int[] { 33471, 32679 });
-		houseLocations.put(262153, new int[] { 33459, 32700 });
-		houseLocations.put(262154, new int[] { 33424, 32690 });
-		houseLocations.put(262155, new int[] { 33409, 32675 });
-		houseLocations.put(262156, new int[] { 33420, 32709 });
-		houseLocations.put(262157, new int[] { 33375, 32698 });
-		houseLocations.put(262158, new int[] { 33363, 32684 });
-		houseLocations.put(262159, new int[] { 33360, 32670 });
-		houseLocations.put(262160, new int[] { 33341, 32661 });
-		houseLocations.put(262161, new int[] { 33346, 32675 });
-		houseLocations.put(262162, new int[] { 33341, 32710 });
-		houseLocations.put(262163, new int[] { 33355, 32734 });
-		houseLocations.put(262164, new int[] { 33366, 32714 });
-		houseLocations.put(262165, new int[] { 33381, 32715 });
-		houseLocations.put(262166, new int[] { 33404, 32739 });
-		houseLocations.put(262167, new int[] { 33424, 32718 });
-		houseLocations.put(262168, new int[] { 33449, 32732 });
-		houseLocations.put(262169, new int[] { 33405, 32757 });
-		houseLocations.put(262170, new int[] { 33366, 32761 });
-		houseLocations.put(262171, new int[] { 33351, 32775 });
-		houseLocations.put(262172, new int[] { 33358, 32789 });
-		houseLocations.put(262173, new int[] { 33372, 32792 });
-		houseLocations.put(262174, new int[] { 33384, 32776 });
-		houseLocations.put(262175, new int[] { 33403, 32794 });
-		houseLocations.put(262176, new int[] { 33485, 32794 });
-		houseLocations.put(262177, new int[] { 33499, 32804 });
-		houseLocations.put(262178, new int[] { 33382, 32804 });
-		houseLocations.put(262179, new int[] { 33376, 32828 });
-		houseLocations.put(262180, new int[] { 33399, 32813 });
-		houseLocations.put(262181, new int[] { 33397, 32822 });
-		houseLocations.put(262182, new int[] { 33437, 32844 });
-		houseLocations.put(262183, new int[] { 33459, 32840 });
-		houseLocations.put(262184, new int[] { 33391, 32851 });
-		houseLocations.put(262185, new int[] { 33399, 32860 });
-		houseLocations.put(262186, new int[] { 33415, 32853 });
-		houseLocations.put(262187, new int[] { 33375, 32873 });
-		houseLocations.put(262188, new int[] { 33428, 32871 });
-		houseLocations.put(262189, new int[] { 33443, 32870 });
-		houseLocations.put(327681, new int[] { 33609, 33217 });
-		houseLocations.put(327682, new int[] { 33630, 33209 });
-		houseLocations.put(327683, new int[] { 33628, 33226 });
-		houseLocations.put(327684, new int[] { 33633, 33248 });
-		houseLocations.put(327685, new int[] { 33619, 33265 });
-		houseLocations.put(327686, new int[] { 33575, 33233 });
-		houseLocations.put(327687, new int[] { 33584, 33306 });
-		houseLocations.put(327688, new int[] { 33581, 33338 });
-		houseLocations.put(327689, new int[] { 33620, 33381 });
-		houseLocations.put(327690, new int[] { 33625, 33398 });
-		houseLocations.put(327691, new int[] { 33625, 33445 });
-		houseLocations.put(524289, new int[] { 32564, 32675 });
-		houseLocations.put(524290, new int[] { 32549, 32707 });
-		houseLocations.put(524291, new int[] { 32538, 32782 });
-		houseLocations.put(524292, new int[] { 32558, 32786 });
-		houseLocations.put(524293, new int[] { 32536, 32809 });
-		houseLocations.put(524294, new int[] { 32554, 32819 });
-	}
 
 	private L1HouseLocation() {
 	}
@@ -383,9 +316,30 @@ public class L1HouseLocation {
 
 	public static int[] getHouseLoc(int houseId) {
 		int[] location = { 0, 0, ADEN };
-		int[] xy = houseLocations.get(houseId);
-		location[0] = xy[0];
-		location[1] = xy[1];
+		L1House house = HouseTable.getInstance().getHouseTable(houseId);
+		L1Spawn keeperloc = NpcSpawnTable.getInstance().findSpawnByHousekeeperId(house.getKeeperId());
+		int x = keeperloc.getLocX();
+		int y = keeperloc.getLocY();
+
+		switch (keeperloc.getHeading()) {
+			case 2:
+			case 4:
+				x += 1;
+				y += 1;
+				break;
+			case 6:
+			case 8:
+				x -= 1;
+				y -= 1;
+				break;
+			default:
+				x += 1;
+				y -= 1;
+				break;
+		}
+		location[0] = x;
+		location[1] = y;
+
 		return location;
 	}
 

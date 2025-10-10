@@ -50,6 +50,7 @@ services:
       - .env
     volumes:
       - ./config:/l1j/config
+      - ./logs:/l1j/log
     depends_on:
       l1jdb:
         condition: service_healthy
