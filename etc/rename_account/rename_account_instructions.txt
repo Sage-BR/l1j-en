@@ -1,0 +1,5 @@
+Docker:
+
+1. docker compose -f ./docker_etc-compose.yaml run --rm -it l1jetc sh
+2. cd rename_account
+3. ./renameaccount.sh

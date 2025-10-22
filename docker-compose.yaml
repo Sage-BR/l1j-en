@@ -40,9 +40,10 @@ services:
 
   l1jserver:
     environment:
-      DB_URL: "jdbc:mysql://l1jdb:3306/l1jdb?autoReconnect=true&useUnicode=True&characterEncoding=UTF-8"
+      DB_URL: ${DB_URL}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
+      PASSWORD_SALT: ${PASSWORD_SALT}
     build: .
     container_name: l1j-server
     restart: always

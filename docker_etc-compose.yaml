@@ -1,0 +1,16 @@
+services:
+  l1jetc:
+    image: eclipse-temurin:17-jdk
+    container_name: l1j-etc
+    working_dir: /l1j/etc
+    volumes:
+      - ./etc:/l1j/etc
+      - ./lib:/l1j/lib
+      - .env:/l1j/etc/rename_account/.env:ro
+    networks:
+      - l1jnet
+
+networks:
+  l1jnet:
+    driver: bridge
+    

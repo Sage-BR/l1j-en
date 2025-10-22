@@ -2,7 +2,7 @@
 setlocal
 
 rem Compile the Java file
-javac RenameAccount.java
+javac -cp ".;../../lib/*" RenameAccount.java
 if errorlevel 1 (
     echo Compilation failed.
     exit /b 1
