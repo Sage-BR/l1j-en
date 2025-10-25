@@ -63,7 +63,7 @@ public class NPCTalkDataTable {
 				l1npctalkdata.setCaoticAction(rs.getString(3));
 				l1npctalkdata.setTeleportURL(rs.getString(4));
 				l1npctalkdata.setTeleportURLA(rs.getString(5));
-				_datatable.put(new Integer(l1npctalkdata.getNpcID()),
+				_datatable.put(l1npctalkdata.getNpcID(),
 						l1npctalkdata);
 			}
 			_log.info("NPC Action List: " + _datatable.size() + " Loaded");
@@ -77,6 +77,6 @@ public class NPCTalkDataTable {
 	}
 
 	public L1NpcTalkData getTemplate(int i) {
-		return _datatable.get(new Integer(i));
+		return _datatable.get(i);
 	}
 }

@@ -87,8 +87,7 @@ public class L1Quest {
 				pstm.setInt(1, _owner.getId());
 				rs = pstm.executeQuery();
 				while (rs.next()) {
-					_quest.put(new Integer(rs.getInt(2)),
-							new Integer(rs.getInt(3)));
+					_quest.put(rs.getInt(2), rs.getInt(3));
 				}
 			} catch (SQLException e) {
 				_log.error(e.getLocalizedMessage(), e);
@@ -98,7 +97,7 @@ public class L1Quest {
 				SQLUtil.close(con);
 			}
 		}
-		Integer step = _quest.get(new Integer(quest_id));
+		Integer step = _quest.get(quest_id);
 		if (step == null) {
 			return 0;
 		} else {
@@ -112,7 +111,7 @@ public class L1Quest {
 
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			if (_quest.get(new Integer(quest_id)) == null) {
+			if (_quest.get(quest_id) == null) {
 				pstm = con.prepareStatement("INSERT INTO character_quests "
 						+ "SET char_id = ?, quest_id = ?, quest_step = ?");
 				pstm.setInt(1, _owner.getId());
@@ -135,7 +134,7 @@ public class L1Quest {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);
 		}
-		_quest.put(new Integer(quest_id), new Integer(step));
+		_quest.put(quest_id, step);
 	}
 
 	public void add_step(int quest_id, int add) {

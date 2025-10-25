@@ -178,33 +178,33 @@ public class L1Magic {
 		if (isMissingSkillEffect()) {
 			return false;
 		}
+        if (skillId == CANCELLATION) {
+            if (_calcType == PC_PC && _pc != null && _targetPc != null) {
+
+                if (_pc.getId() == _targetPc.getId()) {
+                    return true;
+                }
+                if (_pc.getClanid() > 0
+                        && (_pc.getClanid() == _targetPc.getClanid())) {
+                    return true;
+                }
+                if (_pc.isInParty()) {
+                    if (_pc.getParty().isMember(_targetPc)) {
+                        return true;
+                    }
+                }
+                if (_pc.getZoneType() == ZoneType.Safety
+                        || _targetPc.getZoneType() == ZoneType.Safety) {
+                    return false;
+                }
+            }
+            if (_calcType == PC_NPC || _calcType == NPC_PC
+                    || _calcType == NPC_NPC) {
+                return true;
+            }
+        }
 		if (!checkZone(skillId)) {
 			return false;
-		}
-		if (skillId == CANCELLATION) {
-			if (_calcType == PC_PC && _pc != null && _targetPc != null) {
-
-				if (_pc.getId() == _targetPc.getId()) {
-					return true;
-				}
-				if (_pc.getClanid() > 0
-						&& (_pc.getClanid() == _targetPc.getClanid())) {
-					return true;
-				}
-				if (_pc.isInParty()) {
-					if (_pc.getParty().isMember(_targetPc)) {
-						return true;
-					}
-				}
-				if (_pc.getZoneType() == ZoneType.Safety
-						|| _targetPc.getZoneType() == ZoneType.Safety) {
-					return false;
-				}
-			}
-			if (_calcType == PC_NPC || _calcType == NPC_PC
-					|| _calcType == NPC_NPC) {
-				return true;
-			}
 		}
 		if (_target.hasSkillEffect(EARTH_BIND)) {
 			if (skillId != WEAPON_BREAK && skillId != CANCELLATION) {

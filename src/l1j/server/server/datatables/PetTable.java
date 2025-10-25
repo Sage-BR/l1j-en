@@ -74,7 +74,7 @@ public class PetTable {
 				pet.set_lawful(rs.getInt(9));
 				pet.set_weapon(rs.getInt(10));
 				pet.set_armor(rs.getInt(11));
-				_pets.put(new Integer(itemobjid), pet);
+				_pets.put(itemobjid, pet);
 			}
 		} catch (SQLException e) {
 			_log.error(e.getLocalizedMessage(), e);
@@ -96,7 +96,7 @@ public class PetTable {
 		l1pet.set_mp(pet.getMaxMp());
 		l1pet.set_exp(750); // Lv.5 EXP
 		l1pet.set_lawful(0);
-		_pets.put(new Integer(itemobjid), l1pet);
+		_pets.put(itemobjid, l1pet);
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
@@ -231,7 +231,7 @@ public class PetTable {
 		l1pet.set_exp(lvExp); // upLv EXP
 		l1pet.set_lawful(0);
 		// l1pet.set_food(50);
-		_pets.put(new Integer(itemobjid), l1pet);
+		_pets.put(itemobjid, l1pet);
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
@@ -260,7 +260,7 @@ public class PetTable {
 	}
 
 	public L1Pet getTemplate(int itemobjid) {
-		return _pets.get(new Integer(itemobjid));
+		return _pets.get(itemobjid);
 	}
 
 	public L1Pet[] getPetTableList() {

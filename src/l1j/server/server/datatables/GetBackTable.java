@@ -56,7 +56,7 @@ public class GetBackTable {
 				gb.setScrollescape(rs.getInt("scrollescape"));
 				gb.setNote(rs.getString("note"));
 				
-				_getback.put(new Integer(area_mapid), gb);
+				_getback.put(area_mapid, gb);
 			}
 		} catch (SQLException e) {
 			_log.error(e.getLocalizedMessage(), e);

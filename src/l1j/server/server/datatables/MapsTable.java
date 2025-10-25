@@ -101,7 +101,7 @@ public final class MapsTable {
 				data.isRecallPets = rs.getBoolean("recall_pets");
 				data.isUsableItem = rs.getBoolean("usable_item");
 				data.isUsableSkill = rs.getBoolean("usable_skill");
-				_maps.put(new Integer(mapId), data);
+				_maps.put(mapId, data);
 			}
 			_log.info("Maps " + _maps.size());
 		} catch (SQLException e) {

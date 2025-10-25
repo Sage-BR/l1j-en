@@ -119,6 +119,7 @@ public class NpcSpawnTable {
 						continue;
 					}
 					l1spawn = new L1Spawn(l1npc);
+					l1spawn.setNpcid(l1npc.get_npcId());
 					l1spawn.setId(rs.getInt("id"));
 					l1spawn.setAmount(rs.getInt("count"));
 					l1spawn.setLocX(rs.getInt("locx"));
@@ -136,7 +137,7 @@ public class NpcSpawnTable {
 					l1spawn.setName(l1npc.get_name());
 					l1spawn.init();
 					spawnCount += l1spawn.getAmount();
-					_spawntable.put(new Integer(l1spawn.getId()), l1spawn);
+					_spawntable.put(l1spawn.getId(), l1spawn);
 					if (l1spawn.getId() > _highestId) {
 						_highestId = l1spawn.getId();
 					}
@@ -193,5 +194,15 @@ public class NpcSpawnTable {
 		_highestId++;
 		l1spawn.setId(_highestId);
 		_spawntable.put(l1spawn.getId(), l1spawn);
+	}
+
+	// there is always only one housekeeper for each house
+	public L1Spawn findSpawnByHousekeeperId(int keeperid) {
+		for (L1Spawn spawn : _spawntable.values()) {
+			if (spawn.getNpcId() == keeperid) {
+				return spawn;
+			}
+		}
+		return null;
 	}
 }

@@ -622,7 +622,8 @@ public final class Config {
 					serverSettings.getProperty("Login", "root"));
 			DB_PASSWORD = System.getenv().getOrDefault("DB_PASSWORD", 
 					serverSettings.getProperty("Password", ""));
-			PASSWORD_SALT = serverSettings.getProperty("PasswordSalt", "");
+			PASSWORD_SALT = System.getenv().getOrDefault("PASSWORD_SALT", 
+					serverSettings.getProperty("PasswordSalt", ""));
 			THREAD_P_TYPE_GENERAL = Integer.parseInt(
 					serverSettings.getProperty("GeneralThreadPoolType", "0"),
 					10);

@@ -61,7 +61,7 @@ public class GetBackRestartTable {
 				gbr.setLocX(rs.getInt("locx"));
 				gbr.setLocY(rs.getInt("locy"));
 				gbr.setMapId(rs.getShort("mapid"));
-				_getbackrestart.put(new Integer(area), gbr);
+				_getbackrestart.put(area, gbr);
 			}
 		} catch (SQLException e) {
 			_log.error(e.getLocalizedMessage(), e);

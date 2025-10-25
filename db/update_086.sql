@@ -119,3 +119,17 @@ UPDATE `house` SET keeper_id = '50563' WHERE house_id = '458817';
 -- 65
 UPDATE `house` SET keeper_id = '50552' WHERE house_id = '458818';
 UPDATE `house` SET keeper_id = '50613' WHERE house_id = '458819';
+
+-- Adding more quest items to restrict on drops. First we make sure to delete them:
+DELETE FROM `quest_drops` WHERE item_id IN (40609, 40611, 40612, 40610, 41229);
+
+-- Gandi Spellbook
+INSERT INTO `quest_drops` VALUES ('40609', 'E');
+-- Duda-Mara Spellbook
+INSERT INTO `quest_drops` VALUES ('40611', 'E');
+-- Atuba Spellbook
+INSERT INTO `quest_drops` VALUES ('40612', 'E');
+-- Neruga Spellbook
+INSERT INTO `quest_drops` VALUES ('40610', 'E');
+ -- Skeleton Skull
+INSERT INTO `quest_drops` VALUES ('41229', 'W');

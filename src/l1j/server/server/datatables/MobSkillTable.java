@@ -102,7 +102,7 @@ public class MobSkillTable {
 						mobskill.setSummonMin(actNo, rs2.getInt("SummonMin"));
 						mobskill.setSummonMax(actNo, rs2.getInt("SummonMax"));
 						mobskill.setPolyId(actNo, rs2.getInt("PolyId"));
-						_mobskills.put(new Integer(mobid), mobskill);
+						_mobskills.put(mobid, mobskill);
 					}
 				} catch (SQLException e1) {
 					_log.error(e1.getLocalizedMessage(), e1);

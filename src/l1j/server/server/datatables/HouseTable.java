@@ -57,7 +57,7 @@ public class HouseTable {
 		return cal;
 	}
 
-	public HouseTable() {
+	private HouseTable() {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;

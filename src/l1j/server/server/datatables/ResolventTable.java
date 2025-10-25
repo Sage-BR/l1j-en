@@ -58,7 +58,7 @@ public final class ResolventTable {
 			for (rs = pstm.executeQuery(); rs.next();) {
 				int itemId = rs.getInt("item_id");
 				int crystalCount = rs.getInt("crystal_count");
-				_resolvent.put(new Integer(itemId), crystalCount);
+				_resolvent.put(itemId, crystalCount);
 			}
 			_log.info("resolvent " + _resolvent.size());
 		} catch (SQLException e) {

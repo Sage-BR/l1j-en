@@ -78,7 +78,7 @@ public class TownTable {
 						.getInt("sales_money_yesterday"));
 				town.set_town_tax(rs.getInt("town_tax"));
 				town.set_town_fix_tax(rs.getInt("town_fix_tax"));
-				_towns.put(new Integer(townid), town);
+				_towns.put(townid, town);
 			}
 		} catch (SQLException e) {
 			_log.error(e.getLocalizedMessage(), e);

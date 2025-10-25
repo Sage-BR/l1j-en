@@ -60,7 +60,7 @@ public final class CheckWarTime {
 				_castle_id = id;
 				_name = rs.getString("name");
 				data._isActive = rs.getBoolean("isActive");
-				_check.put(new Integer(id), data);
+				_check.put(id, data);
 			}
 			_log.info("CheckWarTime " + _check.size());
 		} catch (SQLException e) {

@@ -2986,10 +2986,10 @@ public class L1SkillUse {
 								cha.broadcastPacket(new S_SkillSound(cha.getId(), 2169));
 							}
 							if ((weakAttr & Element.Fire) == Element.Fire) {
-								cha.broadcastPacket(new S_SkillSound(cha.getId(), 2167));
+								cha.broadcastPacket(new S_SkillSound(cha.getId(), 2166));
 							}
 							if ((weakAttr & Element.Water) == Element.Water) {
-								cha.broadcastPacket(new S_SkillSound(cha.getId(), 2166));
+								cha.broadcastPacket(new S_SkillSound(cha.getId(), 2167));
 							}
 							if ((weakAttr & Element.Wind) == Element.Wind) {
 								cha.broadcastPacket(new S_SkillSound(cha.getId(), 2168));

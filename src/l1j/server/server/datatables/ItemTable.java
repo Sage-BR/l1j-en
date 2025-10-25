@@ -249,7 +249,7 @@ public class ItemTable {
 				item.setFoodVolume(rs.getInt("food_volume"));
 				item.setToBeSavedAtOnce((rs.getInt("save_at_once") == 1) ? true
 						: false);
-				result.put(new Integer(item.getItemId()), item);
+				result.put(item.getItemId(), item);
 			}
 		} catch (NullPointerException e) {
 			_log.error(
@@ -334,7 +334,7 @@ public class ItemTable {
 						: false);
 				weapon.setHasteItem(rs.getInt("haste_item") == 0 ? false : true);
 				weapon.setMaxUseTime(rs.getInt("max_use_time"));
-				result.put(new Integer(weapon.getItemId()), weapon);
+				result.put(weapon.getItemId(), weapon);
 			}
 		} catch (NullPointerException e) {
 			_log.error(
@@ -430,7 +430,7 @@ public class ItemTable {
 				armor.set_resist_blind(rs.getInt("regist_blind"));
 				armor.setMaxUseTime(rs.getInt("max_use_time"));
 				armor.setGrade(rs.getInt("grade"));
-				result.put(new Integer(armor.getItemId()), armor);
+				result.put(armor.getItemId(), armor);
 			}
 		} catch (NullPointerException e) {
 			_log.error(

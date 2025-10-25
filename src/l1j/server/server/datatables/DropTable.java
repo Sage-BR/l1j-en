@@ -111,7 +111,7 @@ public class DropTable {
 				ArrayList<L1Drop> dropList = droplistMap.get(drop.getMobid());
 				if (dropList == null) {
 					dropList = new ArrayList<L1Drop>();
-					droplistMap.put(new Integer(drop.getMobid()), dropList);
+					droplistMap.put(drop.getMobid(), dropList);
 				}
 				dropList.add(drop);
 			}

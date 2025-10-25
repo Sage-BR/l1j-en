@@ -64,7 +64,7 @@ public final class DropItemTable {
 				int itemId = rs.getInt("item_id");
 				data.dropRate = rs.getDouble("drop_rate");
 				data.dropAmount = rs.getDouble("drop_amount");
-				_dropItem.put(new Integer(itemId), data);
+				_dropItem.put(itemId, data);
 			}
 			_log.info("drop_item " + _dropItem.size());
 		} catch (SQLException e) {
