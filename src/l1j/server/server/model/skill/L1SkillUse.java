@@ -2195,6 +2195,17 @@ public class L1SkillUse {
 								return;
 							}
 						}
+						// WizLv30 Quest Ettin/Skeleton
+						if (npcId == 81109 && npc.getGfxId() == npc.getTempCharGfx()) {
+							npc.setCurrentHp(npc.getMaxHp());
+							npc.getNpcTemplate().set_undead(3);
+							npc.setTempCharGfx(30);
+							npc.broadcastPacket(new S_ChangeShape(npc.getId(), 30));
+							npc.setName("$7");
+							npc.setNameId("$7");
+							npc.broadcastPacket(new S_ChangeName(npc.getId(), "$7"));
+							return;
+						}
 					}
 					if (_player != null && _player.isInvisble()) {
 						_player.delInvis();

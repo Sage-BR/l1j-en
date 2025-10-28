@@ -191,16 +191,21 @@ public class C_ItemUSe extends ClientBasePacket {
 			return;
 		}
 
-		if (!pc.getMap().isUsableItem()) {
-			pc.sendPackets(new S_ServerMessage(563)); // You can't use it here.
-			return;
-		}
 		int itemId;
 		try {
 			itemId = l1iteminstance.getItem().getItemId();
 		} catch (Exception e) {
 			return;
 		}
+
+		if (!pc.getMap().isUsableItem()) {
+			// WizLv30 Quest Items Restriction Check (only scroll of teleport home allowed)
+			if (pc.getMapId() != 201 || itemId != 40079) {
+				pc.sendPackets(new S_ServerMessage(563)); // You can't use it here.
+				return;
+			}
+		}
+	
 		int l = 0;
 
 		String s = "";

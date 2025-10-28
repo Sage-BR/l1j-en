@@ -519,6 +519,10 @@ public class L1PcInventory extends L1Inventory {
 		return equipeItem;
 	}
 
+	public void takeoffEquip() {
+		takeoffEquip(29); // using floating eye poly to force unequip
+	}
+
 	public void takeoffEquip(int polyid) {
 		takeoffWeapon(polyid);
 		takeoffArmor(polyid);

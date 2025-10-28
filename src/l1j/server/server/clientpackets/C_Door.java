@@ -70,6 +70,31 @@ public class C_Door extends ClientBasePacket {
 				CloseTimer closetimer = new CloseTimer(door);
 				closetimer.begin();
 			}
+		} else if (door.getDoorId() == 6200) { // Wizlvl30 Dungeon zombie door
+			if (door.getOpenStatus() == ActionCodes.ACTION_Open) {
+				return;
+			}
+			if (pc.getInventory().consumeItem(40594, 1)) { // zombie key
+				door.open();
+				CloseTimer closetimer = new CloseTimer(door, 300);
+				closetimer.begin();
+			}
+		} else if (door.getDoorId() == 6201) { // Wizlvl30 Dungeon skeleton door
+			if (door.getOpenStatus() == ActionCodes.ACTION_Open) {
+				return;
+			}
+			if (pc.getInventory().consumeItem(40604, 1)) { // skeleton key
+				door.open();
+				CloseTimer closetimer = new CloseTimer(door, 300);
+				closetimer.begin();
+			}
+		} else if (door.getDoorId() == 6202) { // Wizlvl30 Dungeon orc zombie door
+			if (door.getOpenStatus() == ActionCodes.ACTION_Open) {
+				return;
+			}		
+			door.open();
+			CloseTimer closetimer = new CloseTimer(door, 300);
+			closetimer.begin();
 		} else if (!isExistKeeper(pc, door.getKeeperId())) {
 			if (door.getOpenStatus() == ActionCodes.ACTION_Open) {
 				door.close();
@@ -100,9 +125,15 @@ public class C_Door extends ClientBasePacket {
 	public class CloseTimer implements Runnable {
 
 		private L1DoorInstance _door;
+		private int _time = 5;
 
 		public CloseTimer(L1DoorInstance door) {
 			_door = door;
+		}
+		
+		public CloseTimer(L1DoorInstance door, int time) {
+			_door = door;
+			_time = time;
 		}
 
 		@Override
@@ -120,7 +151,7 @@ public class C_Door extends ClientBasePacket {
 		public void begin() {
 			//Timer timer = new Timer("DoorTimer-"+_door.getDoorId());
 			//timer.schedule(this, 5 * 1000);
-			GeneralThreadPool.getInstance().schedule(this, 5 * 1000);
+			GeneralThreadPool.getInstance().schedule(this, _time * 1000);
 		}
 	}
 

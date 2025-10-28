@@ -147,3 +147,14 @@ UPDATE `spawnlist_npc` SET locx = 32788, locy = 32785 WHERE id = 87546 AND locat
 
 -- Fixing bug where Zeno (Teleporter from TI to SI) wasn't appearing if altsettings.TalkingScrollQuest was True
 UPDATE `spawnlist_npc` SET count = 1 WHERE id = 50059 AND location = 'Zeno';
+
+
+-- Restore WizLv30 Quest Ettin/Skeleton behavior with CANCELLATION + TURN UNDEAD
+UPDATE `npc` SET `name` = 'Ettin', nameid = '$1010', gfxid = 1128, undead = 0 WHERE npcid = 81109;
+INSERT INTO `spawnlist_door` VALUES 
+('6200', 'Mage Quest Dungeon', '88', '32812', '32909', '201', '0', '0'),
+('6201', 'Mage Quest Dungeon', '89', '32825', '32920', '201', '0', '0'),
+('6202', 'Mage Quest Dungeon', '90', '32868', '32919', '201', '0', '0');
+INSERT INTO `door_gfxs` VALUES (90, 'TICaves Doors' , 1, 0, 2);
+UPDATE `door_gfxs` SET left_edge_offset = -1 WHERE gfxid = 88;
+UPDATE `dungeon` SET src_x = '32867', src_y = '32920' WHERE src_mapid = '201';
