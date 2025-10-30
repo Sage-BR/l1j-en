@@ -314,6 +314,7 @@ public class C_LoginToServer extends ClientBasePacket {
 		}
 		pc.startHpRegeneration();
 		pc.startMpRegeneration();
+		pc.switchMpRegenReductionMode();
 		pc.startObjectAutoUpdate();
 		client.CharReStart(false);
 		pc.beginExpMonitor();

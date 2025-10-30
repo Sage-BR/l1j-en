@@ -58,6 +58,7 @@ import l1j.server.server.encryptions.Opcodes;
 import l1j.server.server.model.AcceleratorChecker;
 import l1j.server.server.model.HpRegeneration;
 import l1j.server.server.model.L1AccessLevel;
+import l1j.server.server.model.L1AreaLocation;
 import l1j.server.server.model.L1Attack;
 import l1j.server.server.model.L1CastleLocation;
 import l1j.server.server.model.L1Character;
@@ -69,6 +70,7 @@ import l1j.server.server.model.L1DwarfInventory;
 import l1j.server.server.model.L1EquipmentSlot;
 import l1j.server.server.model.L1Inventory;
 import l1j.server.server.model.L1Karma;
+import l1j.server.server.model.L1Location;
 import l1j.server.server.model.L1Magic;
 import l1j.server.server.model.L1Object;
 import l1j.server.server.model.L1Party;
@@ -80,6 +82,7 @@ import l1j.server.server.model.L1Teleport;
 import l1j.server.server.model.L1TownLocation;
 import l1j.server.server.model.L1War;
 import l1j.server.server.model.L1World;
+import l1j.server.server.model.MpReduction;
 import l1j.server.server.model.MpReductionByAwake;
 import l1j.server.server.model.MpRegeneration;
 import l1j.server.server.model.MpRegenerationByDoll;
@@ -212,6 +215,7 @@ public class L1PcInstance extends L1Character {
 
 				stopHpRegeneration();
 				stopMpRegeneration();
+				stopMpReduction();
 
 				int targetobjid = getId();
 				getMap().setPassable(getLocation(), true);
@@ -714,7 +718,11 @@ public class L1PcInstance extends L1Character {
 
 	private MpRegeneration _mpRegen;
 
+	private MpReduction _mpReduction;
+
 	private boolean _mpRegenActive;
+
+	private boolean _mpReductionActive;
 
 	private boolean _mpRegenActiveByDoll;
 	private MpRegenerationByDoll _mpRegenByDoll;
@@ -722,6 +730,8 @@ public class L1PcInstance extends L1Character {
 	private ScheduledFuture<?> _mpRegenByDollFuture;
 
 	private ScheduledFuture<?> _mpRegenFuture;
+
+	private ScheduledFuture<?> _mpReductionFuture;
 
 	private Client _netConnection;
 
@@ -2113,6 +2123,7 @@ public class L1PcInstance extends L1Character {
 		removeAllKnownObjects();
 		stopHpRegeneration();
 		stopMpRegeneration();
+		stopMpReduction();
 		setDead(true);
 		setNetConnection(null);
 		setPacketOutput(null);
@@ -3064,10 +3075,10 @@ public class L1PcInstance extends L1Character {
 	}
 
 	public void setRegenState(int state) {
-		if (!isDead()) {
+		if (_mpRegen != null) {
 			_mpRegen.setState(state);
-			_hpRegen.setState(state);
 		}
+		_hpRegen.setState(state);
 	}
 
 	public void setShapeChange(boolean polyed) {
@@ -3237,12 +3248,23 @@ public class L1PcInstance extends L1Character {
 
 	public void startMpRegeneration() {
 		if (!_mpRegenActive) {
+			stopMpReduction();
 			_mpRegen = new MpRegeneration(this);
 			_mpRegenFuture = GeneralThreadPool.getInstance().scheduleAtFixedRate(_mpRegen, MP_REGEN_INTERVAL,
 					MP_REGEN_INTERVAL);
 			_mpRegenActive = true;
 		}
 	}
+
+	public void startMpReduction() {
+		if (!_mpReductionActive) {
+			stopMpRegeneration();
+			_mpReduction = new MpReduction(this);
+			_mpReductionFuture = GeneralThreadPool.getInstance().scheduleAtFixedRate(_mpReduction, MP_REGEN_INTERVAL,
+					MP_REGEN_INTERVAL);
+			_mpReductionActive = true;
+		}
+	}	
 
 	public void startMpRegenerationByDoll() {
 		final int INTERVAL_BY_DOLL = 60000;
@@ -3323,6 +3345,18 @@ public class L1PcInstance extends L1Character {
 		}
 	}
 
+	public void stopMpReduction() {
+		if (_mpReductionActive) {
+			try {
+				_mpReductionFuture.cancel(true);
+				_mpReduction = null;
+				_mpReductionActive = false;
+			} catch (Exception e) {
+				_log.error("", e);
+			}
+		}
+	}
+
 	public void stopMpRegenerationByDoll() {
 		if (_mpRegenActiveByDoll) {
 			try {
@@ -3333,6 +3367,24 @@ public class L1PcInstance extends L1Character {
 				_log.error("", e);
 			}
 		}
+	}
+
+	public void switchMpRegenReductionMode() {
+		switchMpRegenReductionMode(getLocation());
+	}
+
+	public void switchMpRegenReductionMode(int locx, int locy, short mapid) {
+		switchMpRegenReductionMode(new L1Location(locx, locy, mapid));
+	}
+
+	public void switchMpRegenReductionMode(L1Location loc) {
+		if (loc.getMap().isMpReduction()) {
+			if(L1AreaLocation.isInArea(loc)) {
+				startMpRegeneration();
+			} else {
+				startMpReduction();
+			}
+		} 
 	}
 
 	public void stopPcDeleteTimer() {

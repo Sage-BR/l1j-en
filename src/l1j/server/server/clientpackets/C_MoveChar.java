@@ -115,6 +115,8 @@ public class C_MoveChar extends ClientBasePacket {
 		}
 		pc.getLocation().set(locx, locy);
 		pc.setHeading(heading);
+
+		pc.switchMpRegenReductionMode();
 		
 		if (pc.isGmInvis() || pc.isGhost()) {
 		} else if (pc.isInvisble()) {

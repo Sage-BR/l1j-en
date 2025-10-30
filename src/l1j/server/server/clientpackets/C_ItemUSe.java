@@ -1122,6 +1122,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				}
 			} else if (itemId == 40079 || itemId == 40095) {
 				if (pc.getMap().isEscapable() || pc.isGm()) {
+					pc.startMpRegeneration();
 					int[] loc = Getback.GetBack_Location(pc, true);
 					L1Teleport.teleport(pc, loc[0], loc[1], (short) loc[2], 5, true);
 					inventory.removeItem(l1iteminstance, 1);
