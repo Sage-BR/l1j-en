@@ -2175,16 +2175,20 @@ public class L1PcInstance extends L1Character {
 		int level = ExpTable.getLevelByExp(getExp());
 		int char_level = getLevel();
 		int gap = level - char_level;
-		if (gap == 0) {
-			// sendPackets(new S_OwnCharStatus(this));
-			sendPackets(new S_Exp(this));
-			return;
-		}
 
 		if (gap > 0) {
 			levelUp(gap);
 		} else if (gap < 0) {
 			levelDown(gap);
+		} else {
+			// sendPackets(new S_OwnCharStatus(this));
+			sendPackets(new S_Exp(this));
+		}
+
+		try {
+			save();
+		} catch (Exception e) {
+			_log.error(e.getLocalizedMessage(), e);
 		}
 	}
 
@@ -3460,11 +3464,6 @@ public class L1PcInstance extends L1Character {
 			}
 		}
 
-		try {
-			save();
-		} catch (Exception e) {
-			_log.error(e.getLocalizedMessage(), e);
-		}
 		sendPackets(new S_OwnCharStatus(this));
 	}
 
@@ -3500,11 +3499,6 @@ public class L1PcInstance extends L1Character {
 			setHighLevel(getLevel());
 		}
 
-		try {
-			save();
-		} catch (Exception e) {
-			_log.error(e.getLocalizedMessage(), e);
-		}
 		if (getLevel() >= 51 && getLevel() - 50 > getBonusStats()) {
 			if ((getBaseStr() + getBaseDex() + getBaseCon() + getBaseInt() + getBaseWis() + getBaseCha()) < 210) {
 				sendPackets(new S_bonusstats(getId(), 1));
