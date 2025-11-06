@@ -1,5 +1,5 @@
 # https://github.com/kmindi/openjdk-ant-docker/blob/master/Dockerfile
-FROM openjdk:11-slim AS builder
+FROM eclipse-temurin:11-jdk-focal AS builder
 
 ENV ANT_VERSION=1.10.9
 ENV ANT_HOME=/opt/ant
