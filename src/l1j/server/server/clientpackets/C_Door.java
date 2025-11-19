@@ -89,12 +89,8 @@ public class C_Door extends ClientBasePacket {
 				closetimer.begin();
 			}
 		} else if (door.getDoorId() == 6202) { // Wizlvl30 Dungeon orc zombie door
-			if (door.getOpenStatus() == ActionCodes.ACTION_Open) {
-				return;
-			}		
-			door.open();
-			CloseTimer closetimer = new CloseTimer(door, 300);
-			closetimer.begin();
+			// logic moved to L1SummonInstance.checkPetLocation()
+			return;
 		} else if (!isExistKeeper(pc, door.getKeeperId())) {
 			if (door.getOpenStatus() == ActionCodes.ACTION_Open) {
 				door.close();
@@ -122,7 +118,7 @@ public class C_Door extends ClientBasePacket {
 		return true;
 	}
 
-	public class CloseTimer implements Runnable {
+	public static class CloseTimer implements Runnable {
 
 		private L1DoorInstance _door;
 		private int _time = 5;

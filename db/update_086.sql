@@ -149,7 +149,7 @@ UPDATE `spawnlist_npc` SET locx = 32788, locy = 32785 WHERE id = 87546 AND locat
 UPDATE `spawnlist_npc` SET count = 1 WHERE id = 50059 AND location = 'Zeno';
 
 
--- Restore WizLv30 Quest Ettin/Skeleton behavior with CANCELLATION + TURN UNDEAD
+-- Restore WizLv30 Quest Ettin/Skeleton behavior with CANCELLATION + TURN UNDEAD + CREATE ZOMBIE
 UPDATE `npc` SET `name` = 'Ettin', nameid = '$1010', gfxid = 1128, undead = 0 WHERE npcid = 81109;
 INSERT INTO `spawnlist_door` VALUES 
 ('6200', 'Mage Quest Dungeon', '88', '32812', '32909', '201', '0', '0'),
@@ -158,3 +158,14 @@ INSERT INTO `spawnlist_door` VALUES
 INSERT INTO `door_gfxs` VALUES (90, 'TICaves Doors' , 1, 0, 2);
 UPDATE `door_gfxs` SET left_edge_offset = -1 WHERE gfxid = 88;
 UPDATE `dungeon` SET src_x = '32867', src_y = '32920' WHERE src_mapid = '201';
+INSERT INTO `spawnlist` (`location`, `count`, `npc_templateid`, `group_id`, `locx`, `locy`, `randomx`, `randomy`, `locx1`, `locy1`, `locx2`, `locy2`, `heading`, `min_respawn_delay`, `max_respawn_delay`, `mapid`, `respawn_screen`, `movement_distance`, `rest`, `near_spawn`, `spawn_home`, `spawn_home_range`, `spawn_home_count`, `spawn_home_delay`) VALUES 
+('Orc Zombie', '1', '45104', '0', '32873', '32920', '3', '3', '0', '0', '0', '0', '0', '60', '120', '201', '0', '0', '0', '0', '1', '8', '2', '100');
+INSERT INTO `npc` VALUES 
+('71300', 'pedestal', '', '', 'L1FieldObject', '126', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '0', '-1', '-1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '-1', '0', '0', '0', '0', '0'),
+('71301', 'zombie', '', '', 'L1FieldObject', '52', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '0', '-1', '-1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '-1', '0', '0', '0', '0', '0');
+INSERT INTO `spawnlist_npc` (`location`, `count`, `npc_templateid`, `locx`, `locy`, `randomx`, `randomy`, `heading`, `respawn_delay`, `mapid`, `movement_distance`) VALUES
+('zombie', '1', '71301', '32873', '32912', '0', '0', '4', '0', '201', '0'),
+('zombie', '1', '71301', '32873', '32925', '0', '0', '0', '0', '201', '0'),
+('pedestal-1', '1', '71300', '32873', '32912', '0', '0', '0', '0', '201', '0'),
+('pedestal-2', '1', '71300', '32873', '32925', '0', '0', '0', '0', '201', '0'),
+('pedestal-3', '1', '71300', '32862', '32927', '0', '0', '0', '0', '201', '0');

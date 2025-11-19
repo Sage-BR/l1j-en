@@ -198,7 +198,7 @@ public class C_ItemUSe extends ClientBasePacket {
 			return;
 		}
 
-		if (!pc.getMap().isUsableItem()) {
+		if (!pc.getMap().isUsableItem() && !pc.isGm()) {
 			// WizLv30 Quest Items Restriction Check (only scroll of teleport home allowed)
 			if (pc.getMapId() != 201 || itemId != 40079) {
 				pc.sendPackets(new S_ServerMessage(563)); // You can't use it here.
