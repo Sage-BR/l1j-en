@@ -3064,8 +3064,10 @@ public class L1PcInstance extends L1Character {
 	}
 
 	public void setRegenState(int state) {
-		_mpRegen.setState(state);
-		_hpRegen.setState(state);
+		if (!isDead()) {
+			_mpRegen.setState(state);
+			_hpRegen.setState(state);
+		}
 	}
 
 	public void setShapeChange(boolean polyed) {
