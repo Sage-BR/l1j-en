@@ -191,16 +191,21 @@ public class C_ItemUSe extends ClientBasePacket {
 			return;
 		}
 
-		if (!pc.getMap().isUsableItem()) {
-			pc.sendPackets(new S_ServerMessage(563)); // You can't use it here.
-			return;
-		}
 		int itemId;
 		try {
 			itemId = l1iteminstance.getItem().getItemId();
 		} catch (Exception e) {
 			return;
 		}
+
+		if (!pc.getMap().isUsableItem() && !pc.isGm()) {
+			// WizLv30 Quest Items Restriction Check (only scroll of teleport home allowed)
+			if (pc.getMapId() != 201 || itemId != 40079) {
+				pc.sendPackets(new S_ServerMessage(563)); // You can't use it here.
+				return;
+			}
+		}
+	
 		int l = 0;
 
 		String s = "";
@@ -1117,6 +1122,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				}
 			} else if (itemId == 40079 || itemId == 40095) {
 				if (pc.getMap().isEscapable() || pc.isGm()) {
+					pc.startMpRegeneration();
 					int[] loc = Getback.GetBack_Location(pc, true);
 					L1Teleport.teleport(pc, loc[0], loc[1], (short) loc[2], 5, true);
 					inventory.removeItem(l1iteminstance, 1);

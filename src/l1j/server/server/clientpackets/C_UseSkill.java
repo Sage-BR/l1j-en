@@ -27,6 +27,9 @@ import static l1j.server.server.model.skill.L1SkillId.MEDITATION;
 import static l1j.server.server.model.skill.L1SkillId.RUN_CLAN;
 import static l1j.server.server.model.skill.L1SkillId.TELEPORT;
 import static l1j.server.server.model.skill.L1SkillId.TRUE_TARGET;
+import static l1j.server.server.model.skill.L1SkillId.CANCELLATION;
+import static l1j.server.server.model.skill.L1SkillId.CREATE_ZOMBIE;
+import static l1j.server.server.model.skill.L1SkillId.TURN_UNDEAD;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +42,7 @@ import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.skill.L1SkillUse;
 import l1j.server.server.network.Client;
+import l1j.server.server.serverpackets.S_Paralysis;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.templates.L1Skill;
 
@@ -65,9 +69,20 @@ public class C_UseSkill extends ClientBasePacket {
 			return;
 		}
 
-		if (!pc.getMap().isUsableSkill()) {
-			pc.sendPackets(new S_ServerMessage(563)); // You can't use it here.
-			return;
+		if (!pc.getMap().isUsableSkill() && !pc.isGm()) {
+			// WizLv30 Quest Skills Restriction Check (only cancel and turn undead allowed)
+			if (pc.getMapId() != 201 || 
+					(skillId != CANCELLATION && skillId != TURN_UNDEAD && skillId != CREATE_ZOMBIE)) {
+
+				if (skillId == TELEPORT || skillId == MASS_TELEPORT) {
+					pc.sendPackets(new S_ServerMessage(276)); // You can't randomly teleport here.
+					pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK, false));
+				} else {
+					pc.sendPackets(new S_ServerMessage(563)); // You can't use it here.
+				}
+				
+				return;
+			}
 		}
 
 		if (!pc.isSkillMastery(skillId)) {

@@ -520,6 +520,8 @@ public class L1TeleporterInstance extends L1NpcInstance {
 							true);
 				} else if (action
 						.equalsIgnoreCase("teleport mage-quest-dungen")) {
+					player.getInventory().takeoffEquip();
+					player.startMpReduction();
 					L1Teleport.teleport(player, 32791, 32788, (short) 201, 5,
 							true);
 				} else if (action.equalsIgnoreCase("teleport 29")) { //

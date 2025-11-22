@@ -71,6 +71,7 @@ public class C_Restart extends ClientBasePacket {
 		pc.sendPackets(new S_CharVisualUpdate(pc));
 		pc.startHpRegeneration();
 		pc.startMpRegeneration();
+		pc.switchMpRegenReductionMode();
 		pc.sendPackets(new S_Weather(L1World.getInstance().getWeather()));
 		if (pc.getHellTime() > 0) {
 			pc.beginHell(false);

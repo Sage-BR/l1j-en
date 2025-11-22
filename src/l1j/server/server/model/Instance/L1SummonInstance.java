@@ -9,12 +9,15 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import l1j.server.server.ActionCodes;
 import l1j.server.server.GeneralThreadPool;
+import l1j.server.server.clientpackets.C_Door.CloseTimer;
+import l1j.server.server.datatables.DoorTable;
 import l1j.server.server.datatables.DropTable;
 import l1j.server.server.datatables.NpcTable;
 import l1j.server.server.encryptions.IdFactory;
 import l1j.server.server.model.L1Attack;
 import l1j.server.server.model.L1Character;
 import l1j.server.server.model.L1Inventory;
+import l1j.server.server.model.L1Location;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.ZoneType;
 import l1j.server.server.serverpackets.S_DoActionGFX;
@@ -532,6 +535,7 @@ public class L1SummonInstance extends L1NpcInstance {
 
 		if (_currentPetStatus == 3) {
 			allTargetClear();
+			checkPetLocation();
 		} else {
 			if (!isAiRunning()) {
 				startAI();
@@ -552,5 +556,20 @@ public class L1SummonInstance extends L1NpcInstance {
 			}
 		}
 		return isExsistMaster;
+	}
+
+	private void checkPetLocation() {
+		L1Location quest30WizardGateLocation = new L1Location(32862, 32927, 201);
+		int[] quest30WizardZombieIds = {81183, 81184, 81185, 81186, 81187, 81188};
+
+		if (getLocation().equals(quest30WizardGateLocation) && _tamed &&
+				Arrays.stream(quest30WizardZombieIds).anyMatch(id -> id == getNpcTemplate().get_npcId())) {
+			L1DoorInstance door = DoorTable.getInstance().findByDoorId(6202); // Wizlvl30 Dungeon orc zombie door
+			if (door != null && door.getOpenStatus() == ActionCodes.ACTION_Close) {
+				door.open();
+				CloseTimer closetimer = new CloseTimer(door, 300);
+				closetimer.begin();
+			}
+		}
 	}
 }

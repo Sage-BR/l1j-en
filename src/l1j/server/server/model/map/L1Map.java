@@ -41,6 +41,18 @@ public abstract class L1Map {
 		return false;
 	}
 
+	public boolean isMpReduction() {
+		int[] mpReductionZones = new int[] { 201 };
+
+		for(int zoneId : mpReductionZones) {
+			if(zoneId == this.getId()) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
 	public abstract int getId();
 
 	public abstract int getX();

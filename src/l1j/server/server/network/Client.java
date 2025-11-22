@@ -228,6 +228,7 @@ public class Client implements Runnable, PacketOutput {
 		pc.setOnlineStatus(0);
 		pc.stopHpRegeneration();
 		pc.stopMpRegeneration();
+		pc.stopMpReduction();
 
 		LogIP li = new LogIP();
 		li.storeLogout(pc);
