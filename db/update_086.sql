@@ -150,6 +150,7 @@ UPDATE `spawnlist_npc` SET count = 1 WHERE id = 50059 AND location = 'Zeno';
 
 
 -- Restore WizLv30 Quest Ettin/Skeleton behavior with CANCELLATION + TURN UNDEAD + CREATE ZOMBIE
+UPDATE `mapids` SET usable_item = '0', usable_skill = '0' WHERE mapid = '201';
 UPDATE `npc` SET `name` = 'Ettin', nameid = '$1010', gfxid = 1128, undead = 0 WHERE npcid = 81109;
 INSERT INTO `spawnlist_door` VALUES 
 ('6200', 'Mage Quest Dungeon', '88', '32812', '32909', '201', '0', '0'),
