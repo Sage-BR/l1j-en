@@ -148,7 +148,6 @@ UPDATE `spawnlist_npc` SET locx = 32788, locy = 32785 WHERE id = 87546 AND locat
 -- Fixing bug where Zeno (Teleporter from TI to SI) wasn't appearing if altsettings.TalkingScrollQuest was True
 UPDATE `spawnlist_npc` SET count = 1 WHERE id = 50059 AND location = 'Zeno';
 
-
 -- Restore WizLv30 Quest Ettin/Skeleton behavior with CANCELLATION + TURN UNDEAD + CREATE ZOMBIE
 UPDATE `mapids` SET usable_item = '0', usable_skill = '0' WHERE mapid = '201';
 UPDATE `npc` SET `name` = 'Ettin', nameid = '$1010', gfxid = 1128, undead = 0 WHERE npcid = 81109;
@@ -170,3 +169,6 @@ INSERT INTO `spawnlist_npc` (`location`, `count`, `npc_templateid`, `locx`, `loc
 ('pedestal-1', '1', '71300', '32873', '32912', '0', '0', '0', '0', '201', '0'),
 ('pedestal-2', '1', '71300', '32873', '32925', '0', '0', '0', '0', '201', '0'),
 ('pedestal-3', '1', '71300', '32862', '32927', '0', '0', '0', '0', '201', '0');
+
+-- fix npc-eliza dialog 
+INSERT INTO `npcaction` VALUES ('70622', 'eliza1', '', '', '');
