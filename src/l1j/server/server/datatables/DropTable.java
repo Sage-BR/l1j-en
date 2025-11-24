@@ -149,7 +149,6 @@ public class DropTable {
 		int addCount;
 		int randomChance;
 		L1ItemInstance item;
-		new Random();
 
 		for (L1Drop drop : dropList) {
 			itemId = drop.getItemid();
