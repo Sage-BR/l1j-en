@@ -39,6 +39,7 @@ services:
       - l1jnet
 
   l1jserver:
+    image: l1jserver:ci
     environment:
       DB_URL: ${DB_URL}
       DB_USER: ${DB_USER}

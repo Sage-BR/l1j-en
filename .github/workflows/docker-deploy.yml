@@ -1,0 +1,50 @@
+name: docker deployment
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver: docker-container
+          install: true
+      
+      - name: Configure .env for CI
+        run: |
+          cp .env.template .env
+          sed -i 's/localhost/l1jdb/' .env
+      
+      - name: Build and cache the l1jserver image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          load: true
+          tags: l1jserver:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Start the stack
+        run: docker compose up -d
+
+      - name: Check running containers
+        run: docker compose ps
+
+      - name: Wait for l1jserver to be ready
+        run: |
+          echo "Waiting for l1jserver to be ready..."
+          sleep 10
+      
+      - name: Show all container logs
+        run: docker compose logs
+
+      - name: Check container logs for successful server start
+        run: |
+          set -o pipefail
+          docker compose logs l1jserver | grep -q "NetworkServer.run INFO: Starting networking"
