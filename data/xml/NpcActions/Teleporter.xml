@@ -904,85 +904,85 @@
 		<Teleport X="32885" Y="32652" Map="4" Heading="5" Price="2000"/>
 	</Action>
 	<Action Name="teleport heinec-village" NpcId="50067">
-		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="0"/>
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="100"/>
 	</Action>
 	<Action Name="teleport heinec-evadun" NpcId="50067">
-		<Teleport X="32694" Y="32828" Map="61" Heading="5" Price="0"/>
+		<Teleport X="32694" Y="32828" Map="61" Heading="5" Price="200"/>
 	</Action>
 	<Action Name="teleport heinec-forgotten" NpcId="50067">
-		<Teleport X="33427" Y="33481" Map="4" Heading="5" Price="0"/>
+		<Teleport X="33427" Y="33481" Map="4" Heading="5" Price="300"/>
 	</Action>
 	<Action Name="teleport dwarfc-village" NpcId="50040">
-		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="0"/>
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="100"/>
 	</Action>
 	<Action Name="teleport dwarfc-ivorytower" NpcId="50040">
-		<Teleport X="32773" Y="32806" Map="79" Heading="5" Price="0"/>
+		<Teleport X="32773" Y="32806" Map="79" Heading="5" Price="200"/>
 	</Action>
 	<Action Name="teleport dwarfc-crystal" NpcId="50040">
-		<Teleport X="34174" Y="32184" Map="4" Heading="5" Price="0"/>
+		<Teleport X="34174" Y="32184" Map="4" Heading="5" Price="300"/>
 	</Action>
 	<Action Name="teleport giranc-village" NpcId="50035">
-		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="0"/>
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="100"/>
 	</Action>
 	<Action Name="teleport giranc-girandun" NpcId="50035">
-		<Teleport X="32731" Y="32728" Map="55" Heading="5" Price="0"/>
+		<Teleport X="32731" Y="32728" Map="55" Heading="5" Price="200"/>
 	</Action>
 	<Action Name="teleport giranc-dragonvalley" NpcId="50035">
-		<Teleport X="33432" Y="32546" Map="4" Heading="5" Price="0"/>
+		<Teleport X="33432" Y="32546" Map="4" Heading="5" Price="300"/>
 	</Action>
 	<Action Name="teleport giranc-littlebb" NpcId="50035">
-		<Teleport X="33517" Y="32851" Map="4" Heading="5" Price="0"/>
+		<Teleport X="33517" Y="32851" Map="4" Heading="5" Price="400"/>
 	</Action>
 	<Action Name="teleport orc-village" NpcId="50063">
-		<Teleport X="32715" Y="32448" Map="4" Heading="5" Price="0"/>
+		<Teleport X="32715" Y="32448" Map="4" Heading="5" Price="100"/>
 	</Action>
 	<Action Name="teleport orc-elvendun" NpcId="50063">
-		<Teleport X="32760" Y="32761" Map="21" Heading="5" Price="0"/>
+		<Teleport X="32760" Y="32761" Map="21" Heading="5" Price="200"/>
 	</Action>
 	<Action Name="teleport orc-dragonvalley" NpcId="50063">
-		<Teleport X="33432" Y="32546" Map="4" Heading="5" Price="0"/>
+		<Teleport X="33432" Y="32546" Map="4" Heading="5" Price="300"/>
 	</Action>
 	<Action Name="teleport woodsc-village" NpcId="50052">
-		<Teleport X="32640" Y="33203" Map="4" Heading="5" Price="0"/>
+		<Teleport X="32640" Y="33203" Map="4" Heading="5" Price="100"/>
 	</Action>
 	<Action Name="teleport woodsc-windun" NpcId="50052">
-		<Teleport X="32805" Y="32811" Map="27" Heading="5" Price="0"/>
+		<Teleport X="32805" Y="32811" Map="27" Heading="5" Price="200"/>
 	</Action>
 	<Action Name="teleport woodsc-oasis" NpcId="50052">
-		<Teleport X="32863" Y="33252" Map="4" Heading="5" Price="0"/>
+		<Teleport X="32863" Y="33252" Map="4" Heading="5" Price="300"/>
 	</Action>
 	<Action Name="teleport woodsc-sknight" NpcId="50052">
-		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="0"/>
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="400"/>
 	</Action>
 	<Action Name="teleport kentcd" NpcId="50023">
 		<Teleport X="32721" Y="33087" Map="240" Heading="5" Price="10000"/>
 	</Action>
 	<Action Name="teleport kentc-village" NpcId="50021">
-		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="0"/>
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="100"/>
 	</Action>
 	<Action Name="teleport kentc-gludun" NpcId="50021">
-		<Teleport X="32764" Y="32774" Map="10" Heading="5" Price="0"/>
+		<Teleport X="32764" Y="32774" Map="10" Heading="5" Price="200"/>
 	</Action>
 	<Action Name="teleport kentc-girdun" NpcId="50021">
-		<Teleport X="32809" Y="32793" Map="54" Heading="5" Price="0"/>
+		<Teleport X="32809" Y="32793" Map="54" Heading="5" Price="300"/>
 	</Action>
 	<Action Name="teleport adenc-village" NpcId="50047">
-		<Teleport X="33965" Y="33253" Map="4" Heading="5" Price="0"/>
+		<Teleport X="33965" Y="33253" Map="4" Heading="5" Price="100"/>
 	</Action>
 	<Action Name="teleport adenc-omantower" NpcId="50047">
-		<Teleport X="32795" Y="32798" Map="101" Heading="5" Price="0"/>
+		<Teleport X="32795" Y="32798" Map="101" Heading="5" Price="200"/>
 	</Action>
 	<Action Name="teleport adenc-gypsy" NpcId="50047">
-		<Teleport X="33979" Y="32926" Map="4" Heading="5" Price="0"/>
+		<Teleport X="33979" Y="32926" Map="4" Heading="5" Price="300"/>
 	</Action>
 	<Action Name="teleport diadc-village" NpcId="50075">
-		<Teleport X="32800" Y="32801" Map="310" Heading="5" Price="0"/>
+		<Teleport X="32800" Y="32801" Map="310" Heading="5" Price="100"/>
 	</Action>
 	<Action Name="teleport diadc-oumdun" NpcId="50075">
-		<Teleport X="32864" Y="32939" Map="310" Heading="5" Price="0"/>
+		<Teleport X="32864" Y="32939" Map="310" Heading="5" Price="200"/>
 	</Action>
 	<Action Name="teleport diadc-omantower" NpcId="50075">
-		<Teleport X="32795" Y="32798" Map="101" Heading="5" Price="0"/>
+		<Teleport X="32795" Y="32798" Map="101" Heading="5" Price="300"/>
 	</Action>
 	<Action Name="teleport giran-giran-trade-zone" NpcId="50034">
 		<Teleport X="32702" Y="32842" Map="350" Heading="5" Price="0"/>

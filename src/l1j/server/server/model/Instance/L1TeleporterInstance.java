@@ -218,6 +218,38 @@ public class L1TeleporterInstance extends L1NpcInstance {
 						"180", "270", "270", "300", "300", "900", "10650" };
 			}
 				break;
+			case 50021: {
+				price = new String[] { "100", "200", "300" };
+			}
+				break;
+			case 50052: {
+				price = new String[] { "100", "200", "300", "400" };
+			}
+				break;
+			case 50063: {
+				price = new String[] { "100", "200", "300" };
+			}
+				break;	
+			case 50035: {
+				price = new String[] { "100", "200", "300", "400" };
+			}
+				break;							
+			case 50067: {
+				price = new String[] { "100", "200", "300" };
+			}
+				break;	
+			case 50040: {
+				price = new String[] { "100", "200", "300" };
+			}
+				break;		
+			case 50047: {
+				price = new String[] { "100", "200", "300" };
+			}
+				break;			
+			case 50075: {
+				price = new String[] { "100", "200", "300" };
+			}
+				break;																
 			case 50024: {
 				price = new String[] { "55", "55", "55", "55", "198", "55",
 						"132", "264", "55", "198", "264", "220", "220", "550",
