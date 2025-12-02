@@ -1,5 +1,7 @@
 # l1j-en
 
+![build](https://github.com/l1j-en/classic/actions/workflows/ci.yml/badge.svg)
+
 l1j-en is an English-language server emulator for the South Korean MMORPG,
 Lineage 1.  It targets feature-complete support for the final 2009 US client.
 
