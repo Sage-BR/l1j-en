@@ -35,8 +35,8 @@ import l1j.server.server.utils.SQLUtil;
 public class L1DwarfForClanInventory extends L1Inventory {
 
 	private static final long serialVersionUID = 1L;
-	private static Logger _log = LoggerFactory.getLogger(L1DwarfForClanInventory.class
-			.getName());
+	private static Logger _log = LoggerFactory
+			.getLogger(L1DwarfForClanInventory.class.getName());
 	private final L1Clan _clan;
 
 	public L1DwarfForClanInventory(L1Clan clan) {
@@ -48,29 +48,33 @@ public class L1DwarfForClanInventory extends L1Inventory {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
 			pstm = con
 					.prepareStatement("SELECT * FROM clan_warehouse WHERE clan_name = ? ORDER BY item_name");
 			pstm.setString(1, _clan.getClanName());
 			rs = pstm.executeQuery();
+
 			while (rs.next()) {
 				L1ItemInstance item = new L1ItemInstance();
 				int objectId = rs.getInt("id");
 				item.setId(objectId);
+
 				int itemId = rs.getInt("item_id");
 				L1Item itemTemplate = ItemTable.getInstance().getTemplate(
 						itemId);
 				if (itemTemplate == null) {
-					throw new NullPointerException("item_id=" + itemId
-							+ " not found");
+					_log.warn("Item ID " + itemId
+							+ " not found in clan warehouse for clan "
+							+ _clan.getClanName());
+					continue;
 				}
+
 				item.setItem(itemTemplate);
 				item.setCount(rs.getInt("count"));
 				item.setEquipped(false);
 				item.setEnchantLevel(rs.getInt("enchantlvl"));
-				item.setIdentified(rs.getInt("is_id") != 0 ? true : false);
+				item.setIdentified(rs.getInt("is_id") != 0);
 				item.set_durability(rs.getInt("durability"));
 				item.setChargeCount(rs.getInt("charge_count"));
 				item.setRemainingTime(rs.getInt("remaining_time"));
@@ -88,12 +92,20 @@ public class L1DwarfForClanInventory extends L1Inventory {
 				item.setWindResist(rs.getInt("defense_wind"));
 				item.setFireResist(rs.getInt("defense_fire"));
 				item.setEarthResist(rs.getInt("defense_earth"));
+
 				_items.add(item);
-				L1World.getInstance().storeObject(item);
+				L1World.getInstance().storeObject(item); // se você tem um
+															// método
+															// removeObject
+															// quando remove do
+															// warehouse, ok
 			}
 		} catch (SQLException e) {
-			_log.error(e.getLocalizedMessage(), e);
+			_log.error(
+					"Erro ao carregar clan warehouse para "
+							+ _clan.getClanName(), e);
 		} finally {
+			// Sempre fecha os recursos, mesmo em caso de exceção
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);

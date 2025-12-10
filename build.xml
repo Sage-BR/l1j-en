@@ -23,19 +23,18 @@
 
   <!-- Set Property -->
   <property name="src.dir" value="src" />
-  <property name="lib.dir" value="lib" />
+  <property name="lib.dir" value="Server/lib" />
   <property name="build.dir" value="build" />
-  <property name="jarfile" value="l1jen.jar" />
+  <property name="jarfile" value="Server/l1jen.jar" />
 
   <path id="classpath">
     <fileset dir="${lib.dir}">
-      <include name="c3p0-0.9.1.2.jar" />
+      <include name="HikariCP-3.4.2.jar" />
       <include name="javolution.jar" />
-      <include name="mysql-connector-java-5.1.31-bin.jar" />
+      <include name="mariadb-java-client-2.5.3.jar" />
       <include name="guava-17.0.jar" />
-      <include name="slf4j-api-1.7.5.jar" />
-      <include name="slf4j-jdk14-1.7.5.jar" />
-      <include name="bonecp-0.8.0.RELEASE.jar" />
+      <include name="slf4j-api-1.7.30.jar" />
+      <include name="slf4j-jdk14-1.7.25.jar" />
       <include name="sshd-core-1.2.0.jar" />
       <include name="netty-all-4.1.29.Final.jar" />
       <include name="javax.activation-api-1.2.0.jar" />
